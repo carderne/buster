@@ -46,7 +46,7 @@ def main():
         static_path = os.path.join(os.getcwd(), 'static')
 
     if arguments['--web-url'] is not None:
-        web_url = "https://{}".format(arguments['--web-url'])
+        web_url = "{}".format(arguments['--web-url'])
     else:
         web_url = None
 
@@ -121,7 +121,8 @@ def main():
                 # extension-less files to filename.html
                 if (root == static_path
                     or root == os.path.join(static_path, 'tag'))\
-                        and static_page_regex.match(filename):
+                        and static_page_regex.match(filename)\
+                        and filename != 'CNAME':
                     newname = filename + ".html"
                     newpath = os.path.join(root, newname)
                     try:
