@@ -9,6 +9,7 @@ Start with a clean, no commits Github repository.
 *Generate Static Pages. Preview. Deploy to Github Pages.*
 
 Warning! This project is a hack. It's not official. But it works for me.
+**Now, support both Py2 and Py3**
 
 The interface
 -------------
@@ -17,7 +18,7 @@ The interface
 
       Creates a GIT repository inside ``static/`` directory.
 
-``generate [--domain=<local-address>] [--github-id=<github-id>]``
+``generate [--domain=<local-address>] [--web-url=<web-url>]``
 
       Generates static pages from locally running Ghost instance.
 
