@@ -1,6 +1,8 @@
 Buster
 ======
 
+**Note:** Edited to forcefully remove /index.html from relative links. I probably broke something in the process.
+
 Super simple, Totally awesome, Brute force **static site generator for**
 `Ghost <http://ghost.org>`__.
 
