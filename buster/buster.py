@@ -149,6 +149,16 @@ def main():
 
                 if href is None:
                     continue
+                    
+                # Edited to forcefully remove /index.html from relative links.
+                # I probably broke something in the process.
+                if (not abs_url_regex.search(href)) or ('/rss/' in href):
+                    new_href = re.sub(r"index.html", r"", href)
+                    new_href = re.sub(r"^([\w-]+)$", r"\1.html", new_href)
+                    if href != new_href:
+                        e.attr('href', new_href)
+                        print("\t", href, "=>", new_href)
+
                 if (not abs_url_regex.search(href)) or ('/rss/' in href):
                     new_href = re.sub(r"/([\w-]+)$", r"/\1.html", href)
                     new_href = re.sub(r"^([\w-]+)$", r"\1.html", new_href)
