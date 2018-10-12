@@ -1,3 +1,5 @@
+Used to follow these isntructions: https://github.com/abhijithvijayan/ghost-on-github-pages
+
 Buster
 ======
 
