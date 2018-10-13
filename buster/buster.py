@@ -64,6 +64,18 @@ def main():
                    "{0}").format(domain, static_path)
         os.system(command)
 
+        command = ("wget "
+                   "--level=0 "  # set level to infinitive
+                   "--recursive "  # follow links to download entire site
+                   "--convert-links "  # make links relative
+                   "--page-requisites "  # grab everything: css/in-lined images
+                   "--no-parent "  # don't go to parent level
+                   "--directory-prefix {1} " # download content to static/folder
+                   "--no-host-directories "  # don't create domain named folder
+                   "--restrict-file-name=unix "  # don't escape query string
+                   "{0}/about/").format(domain, static_path)
+        os.system(command)
+
         # copy sitemap files since Ghost 0.5.7
         base_command = "wget --convert-links --page-requisites --no-parent " \
                        "--directory-prefix {1} --no-host-directories " \
@@ -149,9 +161,6 @@ def main():
 
                 if href is None:
                     continue
-                    
-                # Edited to forcefully remove /index.html from relative links.
-                # I probably broke something in the process.
                 if (not abs_url_regex.search(href)) or ('/rss/' in href):
                     new_href = re.sub(r"index.html", r"", href)
                     new_href = re.sub(r"^([\w-]+)$", r"\1.html", new_href)
