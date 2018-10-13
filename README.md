@@ -1,7 +1,13 @@
-Used to follow these isntructions: https://github.com/abhijithvijayan/ghost-on-github-pages
-
 Buster
 ======
+
+Used to follow these instructions: https://github.com/abhijithvijayan/ghost-on-github-pages
+
+I've made two edits:
+- Forcefully removes /index.html from relative links. Probably broke something in the process.
+- Specifically adds /about/ (a Ghost 'Page' I have) as this type of page was missed by the script.
+
+## Upstream README follows
 
 **Note:** Edited to forcefully remove /index.html from relative links. I probably broke something in the process.
 
