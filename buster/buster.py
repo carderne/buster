@@ -111,8 +111,8 @@ def main():
                         domain)
                     os.system(wget_command)
 
-        pullRss("tag")
-        pullRss("author")
+        #pullRss("tag")
+        #pullRss("author")
 
         # remove query string since Ghost 0.4
         file_regex = re.compile(r'.*?(\?.*)')
