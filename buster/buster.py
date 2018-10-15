@@ -114,6 +114,26 @@ def main():
         #pullRss("tag")
         #pullRss("author")
 
+        # create 404.html file
+        path_404 = os.path.join(static_path, "404.html")
+        shutil.copyfile(os.path.join(static_path, "index.html"), path_404)
+        
+        with open(path_404) as f:
+            file_text = f.read()
+            
+            d = PyQuery(bytes(bytearray(file_text, encoding='utf-8')), parser='html')
+            
+            e = d('main')
+            e.replaceWith("""<main id="content"> <h2>404: Page not found</h2></main>""")
+            
+            new_text = "<!DOCTYPE html>\n<html>" + d.html(method='html') + "</html>"
+
+        with open(path_404, 'w') as f:
+            try:
+                f.write(new_text)
+            except UnicodeEncodeError:
+                f.write(new_text.encode('utf-8'))
+
         # remove query string since Ghost 0.4
         file_regex = re.compile(r'.*?(\?.*)')
         bad_file_regex = re.compile(r'.+\.[0-9]{1,2}$')
