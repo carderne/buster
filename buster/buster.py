@@ -76,6 +76,8 @@ def main():
                    "{0}/about/").format(domain, static_path)
         os.system(command)
 
+        # rather do this with sitemap-generator
+        """
         # copy sitemap files since Ghost 0.5.7
         base_command = "wget --convert-links --page-requisites --no-parent " \
                        "--directory-prefix {1} --no-host-directories " \
@@ -93,6 +95,7 @@ def main():
         os.system(command)
         command = base_command.format(domain, static_path, "sitemap-tags.xml")
         os.system(command)
+		"""
 
         def pullRss(path):
             if path is None:
@@ -125,8 +128,10 @@ def main():
             
             e = d('main')
             e.replaceWith("""<main id="content"> <h2>404: Page not found</h2></main>""")
-            
-            new_text = "<!DOCTYPE html>\n<html>" + d.html(method='html') + "</html>"
+            text = d.html(method='html')
+            text = text.replace('assets/styles/crisp.css', 'https://rdrn.me/assets/styles/crisp.css')
+
+            new_text = "<!DOCTYPE html>\n<html>" + text + "</html>"
 
         with open(path_404, 'w') as f:
             try:
@@ -227,7 +232,8 @@ def main():
 
         def trans_local_domain(text):
             modified_text = text.replace('http://localhost:2368', web_url)
-            modified_text = modified_text.replace('http://', '//')
+            modified_text = modified_text.replace('http://', 'https://')
+            modified_text = modified_text.replace('https://rdrn.me/', '/')
             modified_text = re.sub(r'(rss\/)[a-z]+(.html)', r'\1index.rss',
                                    modified_text)
 
@@ -247,7 +253,7 @@ def main():
 
         for root, dirs, filenames in os.walk(static_path):
             for filename in filenames:
-                if filename.endswith(('.html', '.xml', '.css', '.xsl', '.rss')):
+                if filename.endswith(('.html', '.css', '.xsl', '.rss')):  # removed xml
                     filepath = os.path.join(root, filename)
                     with open(filepath) as f:
                         filetext = f.read()
