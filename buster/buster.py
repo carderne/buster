@@ -159,7 +159,7 @@ def main():
                 if (root == static_path
                     or root == os.path.join(static_path, 'tag'))\
                         and static_page_regex.match(filename)\
-                        and filename != 'CNAME':
+                        and filename != 'CNAME' and filename != 'LICENSE':
                     newname = filename + ".html"
                     newpath = os.path.join(root, newname)
                     try:
